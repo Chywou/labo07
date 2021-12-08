@@ -1,0 +1,31 @@
+D Operateur <<
+Selon ce qui a été fait par le prof
+
+D Operateur << 
+Selon ce qui a été fait par le prof
+
+D estCarree
+v.size() == v[0].size() et est reguliere
+
+D estReguliere
+all_of(first, last, unaryPredicat) ou find_if_not(first, last, unaryPredicat) unaryPredicat -> fonction si égale à la bonne tail 
+adjacent_find ?
+Si rien ne marcher -> tester si min_element == min_colonne (même test que la fonction minCol)
+
+L minCol
+min_element(first, last, compare) compare -> a.size() < b.size()
+
+L sommeLigne
+acummulate dans un transforme
+
+L sommeColonne
+?
+
+L vectSommeMin 
+Récupérer avec min_element l'iterator du plus petit de sommeLigne et copier ce vecteur dans un autre
+
+D shuffleMatrice
+shuffle avecc un random généré
+
+L sortMatrice
+sort en utilise comme compare min_element de chaque vecteur
