@@ -15,12 +15,24 @@ Compilateur    : Mingw-w64 g++ 11.1.0
 #include <vector>
 #include <cstdlib>
 #include <limits>
+#include "manipulationVecteur.h"
 
 using namespace std;
 
+using Vecteur = vector<int>;
+using Matrice = vector<Vecteur>;
+
 int main() {
 
-   
+   Matrice m1 = {{}};
+   Matrice m2 = {{4, 1, 2},
+                 {1, 1, 2},
+                 {2, 1, 2}};
+   Matrice m3 = {{5, 7, 2},
+                 {1, 12},
+                 {5, 7, 1}};
+
+
 
    cout << endl;
    cout << "Presser ENTER pour quitter";
