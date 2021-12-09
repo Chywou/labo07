@@ -22,12 +22,12 @@ using namespace std;
 using Vecteur = vector<int>;
 using Matrice = vector<Vecteur>;
 
-bool minVecteur(Vecteur vecteur1, Vecteur vecteur2);
+bool minVecteur(const Vecteur& vecteur1, const Vecteur& vecteur2);
 int somme(const Vecteur& vecteur);
-bool minElement(Vecteur vecteur1, Vecteur vecteur2);
+bool minElement(const Vecteur& vecteur1, const Vecteur& vecteur2);
 
 
-bool minVecteur(Vecteur vecteur1, Vecteur vecteur2) {
+bool minVecteur(const Vecteur& vecteur1, const Vecteur& vecteur2) {
    return vecteur1.size() < vecteur2.size();
 }
 
@@ -54,7 +54,7 @@ Vecteur vectSommeMin(const Matrice& matrice) {
    return matrice[(size_t)distance(vecteur.begin(), resultat)];
 }
 
-bool minElement(Vecteur vecteur1, Vecteur vecteur2) {
+bool minElement(const Vecteur& vecteur1, const Vecteur& vecteur2) {
 
    return *min_element(vecteur1.begin(), vecteur1.end()) <
           *min_element(vecteur2.begin(), vecteur2.end());
@@ -65,20 +65,26 @@ void sortMatrice(Matrice& matrice) {
 
 }
 
+// C'est pas beau, mais ça marche -> il fraudra trouvé mieux
+Vecteur vecteurSomme;
 
-// Recherche en cours sur la réalisation de sommeColonne
-/*
-void sommetruc(const Vecteur& vecteur1, Vecteur& vecteur2) {
+int sommetruc2(int valeur, int somme) {
+   return valeur + somme;
+}
 
-   vecteur2 =
+
+void sommetruc(const Vecteur& vecteur) {
+
+   transform(vecteur.begin(), vecteur.end(), vecteurSomme.begin(), vecteurSomme
+   .begin(), sommetruc2);
 
 }
 
 Vecteur sommeColonne(const Matrice& matrice) {
-   Vecteur vecteur(matrice.size(), 0);
+   vecteurSomme.clear();
+   vecteurSomme.resize(matrice.size());
 
-   transform(matrice.begin(), matrice.end(), vecteur.begin(), sommetruc);
+   for_each(matrice.begin(), matrice.end(), sommetruc);
 
-   return v1;
+   return vecteurSomme;
 }
-*/
