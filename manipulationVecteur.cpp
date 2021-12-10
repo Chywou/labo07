@@ -22,29 +22,57 @@ using namespace std;
 using Vecteur = vector<int>;
 using Matrice = vector<Vecteur>;
 
-bool minVecteur(const Vecteur& vecteur1, const Vecteur& vecteur2);
-int somme(const Vecteur& vecteur);
+/**
+ * Nom              minTaille
+ * But              Déterminer le plus petite des vecteurs passé en paramètre
+ * @param vecteur1  Le premier vecteur
+ * @param vecteur2  Le deuxième vecteur
+ * @return          Retourne vrai si vecteur1 est strictement plus petit que
+ *                  vecteur2, faux dans le cas contraire
+ */
+bool minTaille(const Vecteur& vecteur1, const Vecteur& vecteur2);
+
+/**
+ * Nom              sommeElement
+ * But              Calculer la somme de tout les éléments présent dans un vecteur
+ * @param vecteur   Le vecteur contenant les éléments
+ * @return          La somme calculée
+ */
+int sommeElement(const Vecteur& vecteur);
+
+/**
+ * Nom              minElement
+ * But              Détérmine quel vecteur possède le plus petit élément
+ * @param vecteur1  Le premier vecteur
+ * @param vecteur2  Le deuxième vecteur
+ * @return          Vrai si vecteur1 possède l'élément le plus petit, faux dans le
+ *                  cas contraire
+ */
 bool minElement(const Vecteur& vecteur1, const Vecteur& vecteur2);
 
 
-bool minVecteur(const Vecteur& vecteur1, const Vecteur& vecteur2) {
+//--------------------------------------------------
+// Définition
+//--------------------------------------------------
+
+bool minTaille(const Vecteur& vecteur1, const Vecteur& vecteur2) {
    return vecteur1.size() < vecteur2.size();
 }
 
 size_t minCol(const Matrice& matrice) {
-   Matrice::const_iterator resultat = min_element(matrice.begin(),matrice.end(),
-                                                  minVecteur);
+   Matrice::const_iterator resultat = min_element(matrice.begin(), matrice.end(),
+                                                  minTaille);
    return (*resultat).size();
 
 }
 
-int somme(const Vecteur& vecteur) {
+int sommeElement(const Vecteur& vecteur) {
    return accumulate(vecteur.begin(), vecteur.end(), 0);
 }
 
 Vecteur sommeLigne(const Matrice& matrice) {
    Vecteur vecteur(matrice.size());
-   transform(matrice.begin(), matrice.end(), vecteur.begin(), somme);
+   transform(matrice.begin(), matrice.end(), vecteur.begin(), sommeElement);
    return vecteur;
 }
 
