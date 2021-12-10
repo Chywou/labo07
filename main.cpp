@@ -4,17 +4,18 @@ Nom du fichier : main.cpp
 Nom du labo    : Labo 07 : Vecteur et Matrice
 Auteur(s)      : Laetitia Guidetti et Dorian Gillioz
 Date creation  : 08.12.2021
-Description    :
+Description    : Ce programme permet de tester des outils manipulant des matrices
+                 (vector de vector) et des vecteurs de int.
 
-Remarque(s)    :
+Remarque(s)    : -
 
 Compilateur    : Mingw-w64 g++ 11.1.0
 -----------------------------------------------------------------------------------
 */
 #include <iostream>
-#include <vector>
-#include <cstdlib>
-#include <limits>
+#include <vector>                   // Utilisation des vecteurs
+#include <cstdlib>                  // EXIT_SUCCESS
+#include <limits>                   // numeric_limits
 #include "manipulationVecteur.h"
 
 using namespace std;
@@ -25,12 +26,16 @@ using Matrice = vector<Vecteur>;
 int main() {
 
    Matrice m1 = {{}};
-   Matrice m2 = {{4, 1, 2},
-                 {1, 1, 2},
-                 {2, 1, 2}};
-   Matrice m3 = {{5, 7, 2},
-                 {1, 12},
+   Matrice m2 = {{8, 9, 2},
+                 {1, 1, 1},
+                 {0, 3, 2}};
+
+   Matrice m3 = {{5},
+                 {1, 1},
+                 {5, 7, 1},
+                 {5, 7, 1},
                  {5, 7, 1}};
+
 
 
 

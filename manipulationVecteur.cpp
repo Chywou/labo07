@@ -4,33 +4,38 @@ Nom du fichier : manipulationVecteur.h
 Nom du labo    : Labo 07 : Vecteur et Matrice
 Auteur(s)      : Laetitia Guidetti et Dorian Gillioz
 Date creation  : 08.12.2021
-Description    :
-
-Remarque(s)    :
+Description    : Définition de fonctions permettant de réaliser divers
+                 manipulation sur des matrices.
+Remarque(s)    : -
 
 Compilateur    : Mingw-w64 g++ 11.1.0
 -----------------------------------------------------------------------------------
 */
 
+#include <algorithm>            // min_element, max_element, transform, sort
+#include <vector>               // Utilisation des vecteurs
+#include <numeric>              // accumulate
+
 #include "manipulationVecteur.h"
-#include <vector>
-#include <algorithm>
-#include <numeric>
 
 using namespace std;
 
 using Vecteur = vector<int>;
 using Matrice = vector<Vecteur>;
 
+//--------------------------------------------------
+// Déclaration
+//--------------------------------------------------
+
 /**
- * Nom              minTaille
+ * Nom              estPlusPetit
  * But              Déterminer le plus petite des vecteurs passé en paramètre
  * @param vecteur1  Le premier vecteur
  * @param vecteur2  Le deuxième vecteur
  * @return          Retourne vrai si vecteur1 est strictement plus petit que
  *                  vecteur2, faux dans le cas contraire
  */
-bool minTaille(const Vecteur& vecteur1, const Vecteur& vecteur2);
+bool estPlusPetit(const Vecteur& vecteur1, const Vecteur& vecteur2);
 
 /**
  * Nom              sommeElement
@@ -50,69 +55,80 @@ int sommeElement(const Vecteur& vecteur);
  */
 bool minElement(const Vecteur& vecteur1, const Vecteur& vecteur2);
 
+/**
+ * Nom              additionValeurs
+ * But              Additionner 2 valeurs
+ * @param valeur1   La première valeur à additionner
+ * @param valeur2   La deuxième valeur à additionner
+ * @return          Le résultat de l'addition des deux valeur
+ */
+int additionValeurs(int valeur1, int valeur2);
+
 
 //--------------------------------------------------
 // Définition
 //--------------------------------------------------
 
-bool minTaille(const Vecteur& vecteur1, const Vecteur& vecteur2) {
+bool estPlusPetit(const Vecteur& vecteur1, const Vecteur& vecteur2) {
    return vecteur1.size() < vecteur2.size();
 }
 
 size_t minCol(const Matrice& matrice) {
-   Matrice::const_iterator resultat = min_element(matrice.begin(), matrice.end(),
-                                                  minTaille);
-   return (*resultat).size();
+   return (*min_element(matrice.cbegin(), matrice.cend(), estPlusPetit)).size();
 
 }
 
 int sommeElement(const Vecteur& vecteur) {
-   return accumulate(vecteur.begin(), vecteur.end(), 0);
+   return accumulate(vecteur.cbegin(), vecteur.cend(), 0);
 }
 
 Vecteur sommeLigne(const Matrice& matrice) {
    Vecteur vecteur(matrice.size());
-   transform(matrice.begin(), matrice.end(), vecteur.begin(), sommeElement);
+   transform(matrice.cbegin(), matrice.cend(), vecteur.begin(), sommeElement);
    return vecteur;
 }
 
 Vecteur vectSommeMin(const Matrice& matrice) {
-   Vecteur vecteur(sommeLigne(matrice));
-   Vecteur::iterator resultat = min_element(vecteur.begin(), vecteur.end());
-   return matrice[(size_t)distance(vecteur.begin(), resultat)];
+   // Vecteur contenant la somme de chaque ligne de la matrice
+   const Vecteur vecteur(sommeLigne(matrice));
+   const Vecteur::const_iterator resultat = min_element(vecteur.cbegin(),
+                                                        vecteur.cend());
+
+   return matrice[(size_t)distance(vecteur.cbegin(), resultat)];
 }
 
 bool minElement(const Vecteur& vecteur1, const Vecteur& vecteur2) {
 
-   return *min_element(vecteur1.begin(), vecteur1.end()) <
-          *min_element(vecteur2.begin(), vecteur2.end());
+   // Vérifie si l'un des vecteurs est vide
+   if (vecteur1.empty()) {
+      return true;
+   }
+   if (vecteur2.empty()) {
+      return false;
+   }
+
+   return *min_element(vecteur1.cbegin(), vecteur1.cend()) <
+          *min_element(vecteur2.cbegin(), vecteur2.cend());
 }
 
 void sortMatrice(Matrice& matrice) {
    sort(matrice.begin(), matrice.end(), minElement);
-
-}
-
-// C'est pas beau, mais ça marche -> il fraudra trouvé mieux
-Vecteur vecteurSomme;
-
-int sommetruc2(int valeur, int somme) {
-   return valeur + somme;
 }
 
 
-void sommetruc(const Vecteur& vecteur) {
-
-   transform(vecteur.begin(), vecteur.end(), vecteurSomme.begin(), vecteurSomme
-   .begin(), sommetruc2);
-
+int additionValeurs(int valeur1, int valeur2) {
+   return valeur1 + valeur2;
 }
+
 
 Vecteur sommeColonne(const Matrice& matrice) {
-   vecteurSomme.clear();
-   vecteurSomme.resize(matrice.size());
+   // La taille du vecteur est égale à la plus longue des lignes de matrice
+   Vecteur vecteurSomme((*max_element(matrice.cbegin(), matrice.cend(),
+                                      estPlusPetit)).size());
 
-   for_each(matrice.begin(), matrice.end(), sommetruc);
-
+   for(Matrice::const_iterator i = matrice.cbegin(); i != matrice.cend(); ++i) {
+      transform((*i).cbegin(), (*i).cend(), vecteurSomme.begin(),
+                vecteurSomme.begin(), additionValeurs);
+   }
    return vecteurSomme;
 }
