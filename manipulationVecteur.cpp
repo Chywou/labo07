@@ -104,8 +104,10 @@ std::ostream& operator<< (std::ostream& os, const Matrice& matrice) {
       if (i) {
          os << ", ";
       }
+      os << matrice[i];
    }
    os << "]";
+   return os;
 }
 
 bool estEgale(const Vecteur& vecteur) {
