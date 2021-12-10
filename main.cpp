@@ -25,20 +25,23 @@ using Matrice = vector<Vecteur>;
 
 int main() {
 
-   Matrice m1 = {{}};
-   Matrice m2 = {{8, 9, 2},
-                 {1, 1, 1},
-                 {0, 3, 2}};
+   Matrice m1 = {};
+   Matrice m2 = {{4, 1, 2, 6},
+                 {1, 1, 6},
+                 {2, 1, 2, 6},
+                 {9, 4, 5}};
+   Matrice m3 = {{5, 7, 2},
+                 {1, 12, 4},
+                 {7, 0, 1}};
 
-   Matrice m3 = {{5},
-                 {1, 1},
-                 {5, 7, 1},
-                 {5, 7, 1},
-                 {5, 7, 1}};
+   shuffleMatrice(m1);
+   shuffleMatrice(m2);
+   shuffleMatrice(m3);
 
-
-
-
+   cout << boolalpha;
+   cout << "1 : " << m1 << endl;
+   cout << "2 : " << m2 << endl;
+   cout << "3 : " << m3 << endl;
    cout << endl;
    cout << "Presser ENTER pour quitter";
    cin.ignore(numeric_limits<streamsize>::max(), '\n');

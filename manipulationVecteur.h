@@ -16,6 +16,50 @@ Compilateur    : Mingw-w64 g++ 11.1.0
 #define LABO07_MANIPULATIONVECTEUR_H
 
 #include <vector>
+#include <iostream>
+
+/**
+ * Nom             operator
+ * But             Permet de formatter l'affichage d'un vecteur
+ * @param os       Le flux
+ * @param vecteur  Le vecteur à afficher au format
+ * @return         Une référence au flux qui avec le formattage du vecteur
+ */
+std::ostream& operator<< (std::ostream& os, const std::vector<int>& vecteur);
+
+/**
+ * Nom              operator
+ * But              Permet de formatter l'affichage d'une matrice (vecteur 2d)
+ * @param os        Le flux
+ * @param matrice   La matrice à afficher au format
+ * @return          Une référence au flux qui avec le formattage de la matrice
+ */
+std::ostream& operator<< (std::ostream& os, const std::vector<std::vector<int>>& matrice);
+
+/**
+ * Nom              estCarree
+ * But              Permet de déterminer si une matric est carrée, c'est-à-dire le même
+ *                  nombre de lignes que de colonnes et qui est régulière
+ * @param matrice   La matrice qu'on veut controler
+ * @return          true si la matrice est carrée et false si elle ne l'est pas
+ */
+bool estCarree(const std::vector<std::vector<int>>& matrice);
+
+/**
+ * Nom              estReguliere
+ * But              Permet de déterminer si une matrice est régulière, c'est-à-dire
+ *                  que toutes les lignes ont la même longueur
+ * @param matrice   La matrice qu'on veut controler
+ * @return          true si elle est régulière et false si elle ne l'est pas
+ */
+bool estReguliere(const std::vector<std::vector<int>>& matrice);
+
+/**
+ * Nom              shuffleMatrice
+ * But              Mélanger les vecteurs de la matrice sans modifier les vecteurs.
+ * @param matrice   La matrice a mélangé
+ */
+void shuffleMatrice(std::vector<std::vector<int>>& matrice);
 
 /**
  * Nom              minCol

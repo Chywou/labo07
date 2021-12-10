@@ -17,15 +17,32 @@ Compilateur    : Mingw-w64 g++ 11.1.0
 #include <numeric>              // accumulate
 
 #include "manipulationVecteur.h"
+#include <vector>
+#include <algorithm>
+#include <numeric>
+#include <chrono>
+#include <random>
 
 using namespace std;
 
 using Vecteur = vector<int>;
 using Matrice = vector<Vecteur>;
 
+// ------------------
+// Variables globales
+// ------------------
+size_t tailleVecteur = 0;
+
 //--------------------------------------------------
 // Déclaration
 //--------------------------------------------------
+
+/**
+ * Nom              estEgale
+ * But              Compare si le nombre de ligne d'un vecteur est égale au nombre du premier d'une matrice
+ * @return          true si c'est égal et false sinon
+ */
+bool estEgale(const Vecteur& vecteur);
 
 /**
  * Nom              estPlusPetit
@@ -68,6 +85,48 @@ int additionValeurs(int valeur1, int valeur2);
 //--------------------------------------------------
 // Définition
 //--------------------------------------------------
+
+ostream& operator<< (ostream& os, const Vecteur& vecteur) {
+   os << "(";
+   for (int i = 0; i < vecteur.size(); ++i) {
+      if (i) {
+         os << ", ";
+      }
+      os << vecteur[i];
+   }
+   os << ")";
+   return os;
+}
+
+std::ostream& operator<< (std::ostream& os, const Matrice& matrice) {
+   os << "[";
+   for (int i = 0; i < matrice.size(); ++i) {
+      if (i) {
+         os << ", ";
+      }
+   }
+   os << "]";
+}
+
+bool estEgale(const Vecteur& vecteur) {
+   return tailleVecteur == vecteur.size();
+}
+
+bool estCarree(const Matrice& matrice) {
+   if (matrice.empty()) return true;
+   return estReguliere(matrice) && matrice.size() == matrice[0].size();
+}
+
+bool estReguliere(const Matrice& matrice) {
+   if (matrice.empty()) return true;
+   tailleVecteur = matrice[0].size();
+   return all_of(matrice.begin(), matrice.end(), estEgale);
+}
+
+void shuffleMatrice(Matrice& matrice) {
+   unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+   shuffle(matrice.begin(), matrice.end(), default_random_engine(seed));
+}
 
 bool estPlusPetit(const Vecteur& vecteur1, const Vecteur& vecteur2) {
    return vecteur1.size() < vecteur2.size();
