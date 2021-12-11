@@ -83,11 +83,11 @@ int additionValeurs(int valeur1, int valeur2);
 
 ostream& operator<< (ostream& os, const Vecteur& vecteur) {
    os << "(";
-   for (int i = 0; i < vecteur.size(); ++i) {
-      if (i) {
+   for (Vecteur::const_iterator i = vecteur.cbegin(); i != vecteur.cend(); ++i) {
+      if (i != vecteur.cbegin()) {
          os << ", ";
       }
-      os << vecteur[i];
+      os << *i;
    }
    os << ")";
    return os;
@@ -95,11 +95,11 @@ ostream& operator<< (ostream& os, const Vecteur& vecteur) {
 
 ostream& operator<< (ostream& os, const Matrice& matrice) {
    os << "[";
-   for (int i = 0; i < matrice.size(); ++i) {
-      if (i) {
+   for (Matrice::const_iterator i = matrice.cbegin(); i != matrice.cend(); ++i) {
+      if (i != matrice.cbegin()) {
          os << ", ";
       }
-      os << matrice[i];
+      os << *i;
    }
    os << "]";
    return os;
