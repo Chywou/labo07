@@ -5,7 +5,7 @@ Nom du labo    : Labo 07 : Vecteur et Matrice
 Auteur(s)      : Laetitia Guidetti et Dorian Gillioz
 Date creation  : 08.12.2021
 Description    : Déclaration de fonctions permettant de réaliser divers
-                 manipulation sur des matrices.
+                 manipulation sur des matrices et vecteurs.
 Remarque(s)    : -
 
 Compilateur    : Mingw-w64 g++ 11.1.0
@@ -15,8 +15,8 @@ Compilateur    : Mingw-w64 g++ 11.1.0
 #ifndef LABO07_MANIPULATIONVECTEUR_H
 #define LABO07_MANIPULATIONVECTEUR_H
 
-#include <vector>
-#include <iostream>
+#include <vector>       // Utilisation des vecteurs
+#include <iostream>     // ostream
 
 /**
  * Nom             operator
@@ -54,12 +54,6 @@ bool estCarree(const std::vector<std::vector<int>>& matrice);
  */
 bool estReguliere(const std::vector<std::vector<int>>& matrice);
 
-/**
- * Nom              shuffleMatrice
- * But              Mélanger les vecteurs de la matrice sans modifier les vecteurs.
- * @param matrice   La matrice a mélangé
- */
-void shuffleMatrice(std::vector<std::vector<int>>& matrice);
 
 /**
  * Nom              minCol
@@ -69,6 +63,7 @@ void shuffleMatrice(std::vector<std::vector<int>>& matrice);
  */
 size_t minCol(const std::vector<std::vector<int>>& matrice);
 
+
 /**
  * Nom              sommeLigne
  * But              Calcule la somme des valeurs de chacune des lignes
@@ -76,6 +71,16 @@ size_t minCol(const std::vector<std::vector<int>>& matrice);
  * @return          Un vecteur contenant la somme de chaque ligne
  */
 std::vector<int> sommeLigne(const std::vector<std::vector<int>>& matrice);
+
+
+/**
+ * Nom              sommeColonne
+ * But              Calculer la somme de chaque colonne de la matrice
+ * @param matrice   Matrice contenant les lignes à calculer
+ * @return
+ */
+std::vector<int> sommeColonne(const std::vector<std::vector<int>>& matrice);
+
 
 /**
  * Nom              vectSommeMin
@@ -86,6 +91,15 @@ std::vector<int> sommeLigne(const std::vector<std::vector<int>>& matrice);
  */
 std::vector<int> vectSommeMin(const std::vector<std::vector<int>>& matrice);
 
+
+/**
+ * Nom              shuffleMatrice
+ * But              Mélanger les vecteurs de la matrice sans modifier les vecteurs.
+ * @param matrice   La matrice à mélanger
+ */
+void shuffleMatrice(std::vector<std::vector<int>>& matrice);
+
+
 /**
  * Nom              sortMatrice
  * But              Trier dans l'ordre croissant une matrice en fonction de
@@ -93,14 +107,6 @@ std::vector<int> vectSommeMin(const std::vector<std::vector<int>>& matrice);
  * @param matrice   Matrice à trier
  */
 void sortMatrice(std::vector<std::vector<int>>& matrice);
-
-/**
- * Nom              sommeColonne
- * But              Calculer la somme de chaque colonne de la matrice
- * @param matrice   Matrice contenant les lignes à calculer
- * @return
- */
-std::vector<int> sommeColonne(const std::vector<std::vector<int>>& matrice);
 
 
 #endif //LABO07_MANIPULATIONVECTEUR_H

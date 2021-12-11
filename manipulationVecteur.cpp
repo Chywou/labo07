@@ -15,34 +15,29 @@ Compilateur    : Mingw-w64 g++ 11.1.0
 #include <algorithm>            // min_element, max_element, transform, sort
 #include <vector>               // Utilisation des vecteurs
 #include <numeric>              // accumulate
-
-#include "manipulationVecteur.h"
-#include <vector>
-#include <algorithm>
-#include <numeric>
 #include <chrono>
 #include <random>
+
+#include "manipulationVecteur.h"
+
 
 using namespace std;
 
 using Vecteur = vector<int>;
 using Matrice = vector<Vecteur>;
 
-// ------------------
-// Variables globales
-// ------------------
-size_t tailleVecteur = 0;
-
 //--------------------------------------------------
 // Déclaration
 //--------------------------------------------------
 
 /**
- * Nom              estEgale
- * But              Compare si le nombre de ligne d'un vecteur est égale au nombre du premier d'une matrice
- * @return          true si c'est égal et false sinon
+ * Nom              estPasEgale
+ * But              Compare si le nombre de lignes des deux vecteurs sont égaux
+ * @param vecteur1  Le premier vecteur
+ * @param vecteur2  Le deuxième vecteur
+ * @return          vrai s'ils ne sont pas égaux, faux sinon
  */
-bool estEgale(const Vecteur& vecteur);
+bool estPasEgale(const Vecteur& vecteur1, const Vecteur& vecteur2);
 
 /**
  * Nom              estPlusPetit
@@ -98,7 +93,7 @@ ostream& operator<< (ostream& os, const Vecteur& vecteur) {
    return os;
 }
 
-std::ostream& operator<< (std::ostream& os, const Matrice& matrice) {
+ostream& operator<< (ostream& os, const Matrice& matrice) {
    os << "[";
    for (int i = 0; i < matrice.size(); ++i) {
       if (i) {
@@ -110,24 +105,17 @@ std::ostream& operator<< (std::ostream& os, const Matrice& matrice) {
    return os;
 }
 
-bool estEgale(const Vecteur& vecteur) {
-   return tailleVecteur == vecteur.size();
-}
-
 bool estCarree(const Matrice& matrice) {
    if (matrice.empty()) return true;
    return estReguliere(matrice) && matrice.size() == matrice[0].size();
 }
 
-bool estReguliere(const Matrice& matrice) {
-   if (matrice.empty()) return true;
-   tailleVecteur = matrice[0].size();
-   return all_of(matrice.begin(), matrice.end(), estEgale);
+bool estPasEgale(const Vecteur& vecteur1, const Vecteur& vecteur2) {
+   return vecteur1.size() != vecteur2.size();
 }
 
-void shuffleMatrice(Matrice& matrice) {
-   unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-   shuffle(matrice.begin(), matrice.end(), default_random_engine(seed));
+bool estReguliere(const Matrice& matrice) {
+   return matrice.end() == adjacent_find(matrice.begin(), matrice.end(), estPasEgale);
 }
 
 bool estPlusPetit(const Vecteur& vecteur1, const Vecteur& vecteur2) {
@@ -135,8 +123,10 @@ bool estPlusPetit(const Vecteur& vecteur1, const Vecteur& vecteur2) {
 }
 
 size_t minCol(const Matrice& matrice) {
+   if(matrice.empty()) {
+      return 0;
+   }
    return (*min_element(matrice.cbegin(), matrice.cend(), estPlusPetit)).size();
-
 }
 
 int sommeElement(const Vecteur& vecteur) {
@@ -149,13 +139,40 @@ Vecteur sommeLigne(const Matrice& matrice) {
    return vecteur;
 }
 
+int additionValeurs(int valeur1, int valeur2) {
+   return valeur1 + valeur2;
+}
+
+Vecteur sommeColonne(const Matrice& matrice) {
+   if(matrice.empty()) {
+      return {};
+   }
+   // La taille du vecteur est égale à la plus longue des lignes de matrice
+   Vecteur vecteurSomme((*max_element(matrice.cbegin(), matrice.cend(),
+                                      estPlusPetit)).size());
+
+   for(Matrice::const_iterator i = matrice.cbegin(); i != matrice.cend(); ++i) {
+      transform((*i).cbegin(), (*i).cend(), vecteurSomme.begin(),
+                vecteurSomme.begin(), additionValeurs);
+   }
+   return vecteurSomme;
+}
+
 Vecteur vectSommeMin(const Matrice& matrice) {
+   if(matrice.empty()) {
+      return {};
+   }
    // Vecteur contenant la somme de chaque ligne de la matrice
    const Vecteur vecteur(sommeLigne(matrice));
    const Vecteur::const_iterator resultat = min_element(vecteur.cbegin(),
                                                         vecteur.cend());
 
    return matrice[(size_t)distance(vecteur.cbegin(), resultat)];
+}
+
+void shuffleMatrice(Matrice& matrice) {
+   unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+   shuffle(matrice.begin(), matrice.end(), default_random_engine(seed));
 }
 
 bool minElement(const Vecteur& vecteur1, const Vecteur& vecteur2) {
@@ -176,20 +193,3 @@ void sortMatrice(Matrice& matrice) {
    sort(matrice.begin(), matrice.end(), minElement);
 }
 
-
-int additionValeurs(int valeur1, int valeur2) {
-   return valeur1 + valeur2;
-}
-
-
-Vecteur sommeColonne(const Matrice& matrice) {
-   // La taille du vecteur est égale à la plus longue des lignes de matrice
-   Vecteur vecteurSomme((*max_element(matrice.cbegin(), matrice.cend(),
-                                      estPlusPetit)).size());
-
-   for(Matrice::const_iterator i = matrice.cbegin(); i != matrice.cend(); ++i) {
-      transform((*i).cbegin(), (*i).cend(), vecteurSomme.begin(),
-                vecteurSomme.begin(), additionValeurs);
-   }
-   return vecteurSomme;
-}
