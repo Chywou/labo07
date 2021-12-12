@@ -1,6 +1,6 @@
 /*
 -----------------------------------------------------------------------------------
-Nom du fichier : manipulationVecteur.h
+Nom du fichier : manipulationVecteur.cpp
 Nom du labo    : Labo 07 : Vecteur et Matrice
 Auteur(s)      : Laetitia Guidetti et Dorian Gillioz
 Date creation  : 08.12.2021
@@ -17,6 +17,7 @@ Compilateur    : Mingw-w64 g++ 11.1.0
 #include <numeric>              // accumulate
 #include <chrono>               // chrono::system_clock
 #include <random>               // default_random_engine
+#include <iostream>             // cout, ostream
 
 #include "manipulationVecteur.h"
 
