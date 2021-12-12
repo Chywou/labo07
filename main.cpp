@@ -36,19 +36,19 @@ int main() {
                  {1, 0, 6},
                  {9, 4, 5}};
 
-   cout << "Matrice 1                                : " << m1               << endl;
-   cout << "Est carree                               : " << estCarree(m1)    << endl;
-   cout << "Est reguliere                            : " << estReguliere(m1) << endl;
-   cout << "Longueur minimale des vecteurs           : " << minCol(m1)       << endl;
-   cout << "Somme des valeurs de chaque ligne        : " << sommeLigne(m1)   << endl;
-   cout << "Somme des valeurs de chaque colonne      : " << sommeColonne(m1) << endl;
-   cout << "Vecteur avec la somme la plus faible     : " << vectSommeMin(m1) << endl;
+   cout << "Matrice 1                                 : " << m1               << endl;
+   cout << "Est carree                                : " << estCarree(m1)    << endl;
+   cout << "Est reguliere                             : " << estReguliere(m1) << endl;
+   cout << "Longueur minimale des vecteurs            : " << minCol(m1)       << endl;
+   cout << "Somme des valeurs de chaque ligne         : " << sommeLigne(m1)   << endl;
+   cout << "Somme des valeurs de chaque colonne       : " << sommeColonne(m1) << endl;
+   cout << "Vecteur avec la somme la plus faible      : " << vectSommeMin(m1) << endl;
    shuffleMatrice(m1);
-   cout << "Melange des vecteurs                     : " << m1               << endl;
+   cout << "Melange des vecteurs                      : " << m1               << endl;
    sortMatrice(m1);
-   cout << "Tri croissant selon les valeurs minimales: " << m1               << endl;
+   cout << "Tri croissant selon les valeurs minimales : " << m1               << endl;
 
-   cout << "------------------------------------------------------" << endl << endl;
+   cout << "-------------------------------------------------------" << endl  << endl;
 
    //--------------------------------------------------
    // Matrice 2
@@ -71,7 +71,7 @@ int main() {
    sortMatrice(m2);
    cout << "Tri croissant selon les valeurs minimales : " << m2               << endl;
 
-   cout << "-------------------------------------------------------" << endl << endl;
+   cout << "-------------------------------------------------------" << endl  << endl;
 
    //--------------------------------------------------
    // Quitter le programme
