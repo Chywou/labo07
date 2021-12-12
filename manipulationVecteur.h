@@ -5,7 +5,7 @@ Nom du labo    : Labo 07 : Vecteur et Matrice
 Auteur(s)      : Laetitia Guidetti et Dorian Gillioz
 Date creation  : 08.12.2021
 Description    : Déclaration de fonctions permettant de réaliser divers
-                 manipulation sur des matrices et vecteurs.
+                 manipulations sur des matrices et vecteurs.
 Remarque(s)    : -
 
 Compilateur    : Mingw-w64 g++ 11.1.0
@@ -40,7 +40,7 @@ std::ostream& operator<< (std::ostream& os, const std::vector<std::vector<int>>&
  * Nom              estCarree
  * But              Permettre de déterminer si une matrice est carrée, c'est-à-dire
  *                  le même nombre de lignes que de colonnes et qui est régulière
- * @param matrice   La matrice qu'on veut contrôler
+ * @param matrice   La matrice que l'on veut contrôler
  * @return          true si la matrice est carrée et false si elle ne l'est pas
  */
 bool estCarree(const std::vector<std::vector<int>>& matrice);
@@ -49,7 +49,7 @@ bool estCarree(const std::vector<std::vector<int>>& matrice);
  * Nom              estReguliere
  * But              Permettre de déterminer si une matrice est régulière,
  *                  c'est-à-dire que toutes les lignes ont la même longueur
- * @param matrice   La matrice qu'on veut contrôler
+ * @param matrice   La matrice que l'on veut contrôler
  * @return          true si elle est régulière et false si elle ne l'est pas
  */
 bool estReguliere(const std::vector<std::vector<int>>& matrice);
@@ -89,7 +89,8 @@ std::vector<int> vectSommeMin(const std::vector<std::vector<int>>& matrice);
 
 /**
  * Nom              shuffleMatrice
- * But              Mélanger les vecteurs de la matrice sans modifier les vecteurs
+ * But              Mélanger les vecteurs de la matrice entre eux sans modifier les vecteurs
+ *                  en eux-même
  * @param matrice   La matrice à mélanger
  */
 void shuffleMatrice(std::vector<std::vector<int>>& matrice);

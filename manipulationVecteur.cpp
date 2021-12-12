@@ -5,7 +5,7 @@ Nom du labo    : Labo 07 : Vecteur et Matrice
 Auteur(s)      : Laetitia Guidetti et Dorian Gillioz
 Date creation  : 08.12.2021
 Description    : Définition de fonctions permettant de réaliser divers
-                 manipulation sur des matrices et vecteurs.
+                 manipulations sur des matrices et vecteurs.
 Remarque(s)    : -
 
 Compilateur    : Mingw-w64 g++ 11.1.0
@@ -62,7 +62,7 @@ int sommeElement(const Vecteur& vecteur);
  * But              Additionner 2 valeurs
  * @param valeur1   La première valeur à additionner
  * @param valeur2   La deuxième valeur à additionner
- * @return          Le résultat de l'addition des deux valeur
+ * @return          Le résultat de l'addition des deux valeurs
  */
 int additionValeurs(int valeur1, int valeur2);
 
@@ -149,7 +149,7 @@ Vecteur sommeColonne(const Matrice& matrice) {
    if(matrice.empty()) {
       return {};
    }
-   // La taille du vecteur est égale à la plus longue des lignes de matrice
+   // La taille du vecteur est égale à la ligne la plus longue de la matrice
    Vecteur vecteurSomme((*max_element(matrice.cbegin(), matrice.cend(),
                                       estPlusPetit)).size());
    // Addition de chaque ligne de matrice dans vecteurSomme
